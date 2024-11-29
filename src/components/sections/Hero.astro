@@ -3,20 +3,17 @@ import Button from "../ui/Button.astro";
 import Container from "../ui/Container.astro";
 ---
 
-<div class="flex min-h-screen gap-8">
+<div class="flex min-h-screen flex-col gap-8 lg:flex-row">
   <!-- Left Section -->
-  <div class="relative w-1/2 rounded-[16.24px] bg-[#562A0E] p-24">
-    <div class="flex h-full flex-col justify-center space-y-28">
-      <!-- Title and Description -->
+  <div class="relative w-full rounded-[16.24px] bg-[#562A0E] p-8 lg:w-1/2 lg:p-24">
+    <div class="flex h-full flex-col justify-center space-y-12 lg:space-y-28">
+      <!-- Hero Content -->
       <div class="space-y-6">
-        <h1 class="text-6xl font-bold leading-tight text-white">
-          Crafting Your<br />
-          Perfect Living<br />
-          Environment
+        <h1 class="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+          Transform Your Space with Professional Interior Painting
         </h1>
-        <p class="text-lg text-white/90">
-          we take pride in our attention to detail and commitment to<br />
-          customer satisfaction. Whether you require regular maintenance.
+        <p class="text-lg text-white/90 md:text-xl">
+          Expert painters delivering exceptional results for your home or business
         </p>
       </div>
 
@@ -25,7 +22,7 @@ import Container from "../ui/Container.astro";
         <Button
           variant="primary"
           href="#contact"
-          class="bg-[#F77F00] px-6 py-4 text-lg"
+          class="w-full bg-[#F77F00] px-6 py-4 text-lg md:w-auto"
         >
           Contact Us Now
           <svg
@@ -47,21 +44,21 @@ import Container from "../ui/Container.astro";
       <!-- Trusted Clients -->
       <div class="space-y-4">
         <p class="text-white/90">Trusted Top Client</p>
-        <div class="flex items-center gap-12">
-          <i class="fa-solid fa-building text-3xl text-white/80"></i>
-          <i class="fa-solid fa-chart-pie text-3xl text-white/80"></i>
-          <i class="fa-solid fa-briefcase text-3xl text-white/80"></i>
+        <div class="flex items-center justify-center gap-12 lg:justify-start">
+          <i class="fa-solid fa-building text-2xl text-white/80 md:text-3xl"></i>
+          <i class="fa-solid fa-chart-pie text-2xl text-white/80 md:text-3xl"></i>
+          <i class="fa-solid fa-briefcase text-2xl text-white/80 md:text-3xl"></i>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Right Section -->
-  <div class="relative w-1/2 overflow-hidden rounded-[16.24px]">
+  <div class="w-full lg:w-1/2">
     <img
       src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80"
       alt="Professional painter working on interior wall"
-      class="h-full w-full object-cover"
+      class="h-full w-full rounded-[16.24px] object-cover"
     />
   </div>
 </div>
