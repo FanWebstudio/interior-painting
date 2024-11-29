@@ -1,0 +1,54 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+---
+
+<section class="relative overflow-hidden bg-[#562A0E] py-16 sm:py-24">
+  <Container>
+    <div class="relative z-10 lg:grid lg:grid-cols-2 lg:gap-8">
+      <!-- Left Content -->
+      <div class="space-y-12">
+        <!-- Title and Description -->
+        <div class="space-y-6">
+          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            Crafting Your Perfect Living Environment
+          </h1>
+          <p class="text-lg leading-8 text-gray-100">
+            We take pride in our attention to detail and commitment to customer satisfaction. Whether you require regular maintenance.
+          </p>
+        </div>
+
+        <!-- CTA Button -->
+        <div>
+          <Button variant="primary" href="#contact" class="group">
+            Contact Us Now
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </Button>
+        </div>
+
+        <!-- Trusted Clients -->
+        <div class="space-y-3">
+          <p class="text-sm font-medium text-gray-300">Trusted Top Client</p>
+          <div class="flex items-center gap-8">
+            <img src="/images/logos/coinbase.svg" alt="Coinbase" class="h-12" />
+            <img src="/images/logos/spotify.svg" alt="Spotify" class="h-12" />
+            <img src="/images/logos/slack.svg" alt="Slack" class="h-12" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="relative mt-20 lg:mt-0">
+        <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-gray-900">
+          <img
+            src="/images/hero.jpg"
+            alt="Family painting together"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
