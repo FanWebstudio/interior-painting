@@ -1,0 +1,153 @@
+---
+import { colors } from "../../constants/theme";
+import Button from "../ui/Button.astro";
+
+const navLinks = [
+	{ href: "/", label: "Home" },
+	{ href: "/service-areas", label: "Service Areas" },
+	{ href: "/company", label: "Company" },
+	{ href: "/client-review", label: "Client Review" },
+	{ href: "/contact", label: "Contact" },
+];
+---
+
+<header class="px-8 py-7">
+	<nav class="max-w-7xl mx-auto flex items-center justify-between">
+		<!-- Logo -->
+		<a href="/" class="flex items-center">
+			<span class={`text-[${colors.text}] text-2xl font-medium`}>HomeMaster</span>
+		</a>
+
+		<!-- Mobile Menu Button -->
+		<button
+			type="button"
+			class="lg:hidden"
+			aria-label="Toggle menu"
+			data-toggle-nav
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<line x1="3" y1="12" x2="21" y2="12"></line>
+				<line x1="3" y1="6" x2="21" y2="6"></line>
+				<line x1="3" y1="18" x2="21" y2="18"></line>
+			</svg>
+		</button>
+
+		<!-- Navigation Links -->
+		<div class="hidden lg:flex items-center gap-8" data-nav-links>
+			{
+				navLinks.map(({ href, label }) => (
+					<a
+						href={href}
+						class={`text-[${colors.text}] hover:text-[${colors.primary}] transition-colors`}
+					>
+						{label}
+					</a>
+				))
+			}
+		</div>
+
+		<!-- Request Service Button -->
+		<div class="hidden lg:block">
+			<Button href="/request-service">
+				Request Service
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M2 12L22 12M22 12L16 6M22 12L16 18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</Button>
+		</div>
+	</nav>
+
+	<!-- Mobile Navigation -->
+	<div
+		class="fixed inset-0 bg-white z-50 flex flex-col p-8 lg:hidden transform translate-x-full transition-transform duration-300"
+		data-nav-menu
+	>
+		<button
+			type="button"
+			class="self-end"
+			aria-label="Close menu"
+			data-close-nav
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<line x1="18" y1="6" x2="6" y2="18"></line>
+				<line x1="6" y1="6" x2="18" y2="18"></line>
+			</svg>
+		</button>
+		<div class="flex flex-col gap-6 mt-8">
+			{
+				navLinks.map(({ href, label }) => (
+					<a
+						href={href}
+						class={`text-[${colors.text}] hover:text-[${colors.primary}] transition-colors text-lg`}
+					>
+						{label}
+					</a>
+				))
+			}
+			<Button href="/request-service" class="w-full justify-center mt-4">
+				Request Service
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M2 12L22 12M22 12L16 6M22 12L16 18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</Button>
+		</div>
+	</div>
+</header>
+
+<script>
+	const toggleNav = document.querySelector('[data-toggle-nav]');
+	const closeNav = document.querySelector('[data-close-nav]');
+	const navMenu = document.querySelector('[data-nav-menu]');
+
+	toggleNav?.addEventListener('click', () => {
+		navMenu?.classList.remove('translate-x-full');
+	});
+
+	closeNav?.addEventListener('click', () => {
+		navMenu?.classList.add('translate-x-full');
+	});
+</script>

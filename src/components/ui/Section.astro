@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string;
+  as?: keyof HTMLElementTagNameMap;
+}
+
+const { class: className = "", as: Element = "section" } = Astro.props;
+---
+
+<Element class:list={["py-16 sm:py-24", className]}>
+  <slot />
+</Element>

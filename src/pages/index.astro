@@ -1,44 +1,11 @@
 ---
-import { Image } from 'astro:assets';
+import Layout from "../components/layout/Layout.astro";
+import Navigation from "../components/layout/Navigation.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>HomeMaster - Interior Painting Services</title>
-	</head>
-	<body class="min-h-screen">
-		<header class="px-8 py-7">
-			<nav class="max-w-7xl mx-auto flex items-center justify-between">
-				<!-- Logo -->
-				<a href="/" class="flex items-center">
-					<span class="text-[#0D0D0D] text-2xl font-medium">HomeMaster</span>
-				</a>
-
-				<!-- Navigation Links -->
-				<div class="flex items-center gap-8">
-					<a href="/" class="text-[#0D0D0D] hover:text-[#F77F00] transition-colors">Home</a>
-					<a href="/service-areas" class="text-[#0D0D0D] hover:text-[#F77F00] transition-colors">Service Areas</a>
-					<a href="/company" class="text-[#0D0D0D] hover:text-[#F77F00] transition-colors">Company</a>
-					<a href="/client-review" class="text-[#0D0D0D] hover:text-[#F77F00] transition-colors">Client Review</a>
-					<a href="/contact" class="text-[#0D0D0D] hover:text-[#F77F00] transition-colors">Contact</a>
-				</div>
-
-				<!-- Request Service Button -->
-				<a 
-					href="/request-service" 
-					class="bg-[#F77F00] text-white px-6 py-4 rounded-xl flex items-center gap-2 hover:bg-[#E67300] transition-colors"
-				>
-					Request Service
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M2 12L22 12M22 12L16 6M22 12L16 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-				</a>
-			</nav>
-		</header>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="HomeMaster - Interior Painting Services">
+	<Navigation />
+	<main class="container mx-auto px-4">
+		<!-- Add your main content here -->
+	</main>
+</Layout>
