@@ -4,6 +4,8 @@ interface Props {
 	description?: string;
 }
 
+import Footer from './Footer.astro';
+
 const {
 	title,
 	description = "Professional interior painting services for your home or business. Quality workmanship and attention to detail guaranteed.",
@@ -26,5 +28,6 @@ const {
 	</head>
 	<body class="min-h-screen">
 		<slot />
+		<Footer />
 	</body>
 </html>
