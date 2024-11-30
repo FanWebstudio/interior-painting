@@ -3,151 +3,114 @@ import { colors } from "../../constants/theme";
 import Button from "../ui/Button.astro";
 
 const navLinks = [
-	{ href: "/", label: "Home" },
-	{ href: "/service-areas", label: "Service Areas" },
-	{ href: "/company", label: "Company" },
-	{ href: "/client-review", label: "Client Review" },
-	{ href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 ---
 
-<header class="px-8 py-4">
-	<nav class="max-w-7xl mx-auto flex items-center justify-between">
-		<!-- Logo -->
-		<a href="/" class="flex items-center">
-			<span class={`text-[${colors.text}] text-2xl font-medium`}>HomeMaster</span>
-		</a>
+<header class="px-4 sm:px-6 lg:px-8 py-4">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 lg:w-1/4">
+      <i class="fa-solid fa-paint-roller text-[#F3752B] text-2xl"></i>
+      <span class="text-[#0D0D0D] text-2xl font-medium">HomeMaster</span>
+    </a>
 
-		<!-- Mobile Menu Button -->
-		<button
-			type="button"
-			class="lg:hidden"
-			aria-label="Toggle menu"
-			data-toggle-nav
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			>
-				<line x1="3" y1="12" x2="21" y2="12"></line>
-				<line x1="3" y1="6" x2="21" y2="6"></line>
-				<line x1="3" y1="18" x2="21" y2="18"></line>
-			</svg>
-		</button>
+    <!-- Mobile Menu Button -->
+    <button
+      type="button"
+      class="lg:hidden text-[#0D0D0D]"
+      aria-label="Toggle menu"
+      data-toggle-nav
+    >
+      <i class="fa-solid fa-bars text-2xl"></i>
+    </button>
 
-		<!-- Navigation Links -->
-		<div class="hidden lg:flex items-center gap-8" data-nav-links>
-			{
-				navLinks.map(({ href, label }) => (
-					<a
-						href={href}
-						class={`text-[${colors.text}] hover:text-[${colors.primary}] transition-colors`}
-					>
-						{label}
-					</a>
-				))
-			}
-		</div>
+    <!-- Navigation Links -->
+    <div class="hidden lg:flex items-center justify-center gap-8 lg:w-2/4" data-nav-links>
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </div>
 
-		<!-- Request Service Button -->
-		<div class="hidden lg:block">
-			<Button href="/request-service">
-				Request Service
-				<svg
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M2 12L22 12M22 12L16 6M22 12L16 18"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-				</svg>
-			</Button>
-		</div>
-	</nav>
+    <!-- Get Quote Button -->
+    <div class="hidden lg:flex justify-end lg:w-1/4">
+      <a
+        href="/quote"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors"
+      >
+        <span>Get Quote</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
 
-	<!-- Mobile Navigation -->
-	<div
-		class="fixed inset-0 bg-white z-50 flex flex-col p-8 lg:hidden transform translate-x-full transition-transform duration-300"
-		data-nav-menu
-	>
-		<button
-			type="button"
-			class="self-end"
-			aria-label="Close menu"
-			data-close-nav
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			>
-				<line x1="18" y1="6" x2="6" y2="18"></line>
-				<line x1="6" y1="6" x2="18" y2="18"></line>
-			</svg>
-		</button>
-		<div class="flex flex-col gap-6 mt-8">
-			{
-				navLinks.map(({ href, label }) => (
-					<a
-						href={href}
-						class={`text-[${colors.text}] hover:text-[${colors.primary}] transition-colors text-lg`}
-					>
-						{label}
-					</a>
-				))
-			}
-			<Button href="/request-service" class="w-full justify-center mt-4">
-				Request Service
-				<svg
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M2 12L22 12M22 12L16 6M22 12L16 18"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-				</svg>
-			</Button>
-		</div>
-	</div>
+    <!-- Mobile Menu -->
+    <div
+      class="hidden fixed inset-0 bg-black/50 lg:hidden"
+      data-nav-overlay
+    ></div>
+    <div
+      class="hidden fixed top-0 right-0 bottom-0 w-[300px] bg-white p-6 lg:hidden shadow-xl"
+      data-nav-menu
+    >
+      <div class="flex justify-end mb-8">
+        <button type="button" aria-label="Close menu" data-close-nav>
+          <i class="fa-solid fa-xmark text-2xl text-[#0D0D0D]"></i>
+        </button>
+      </div>
+      <div class="flex flex-col gap-4">
+        {
+          navLinks.map(({ href, label }) => (
+            <a
+              href={href}
+              class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors text-lg"
+            >
+              {label}
+            </a>
+          ))
+        }
+        <a
+          href="/quote"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors mt-4"
+        >
+          <span>Get Quote</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <script>
-	const toggleNav = document.querySelector('[data-toggle-nav]');
-	const closeNav = document.querySelector('[data-close-nav]');
-	const navMenu = document.querySelector('[data-nav-menu]');
+  const toggleNav = document.querySelector('[data-toggle-nav]');
+  const closeNav = document.querySelector('[data-close-nav]');
+  const navLinks = document.querySelector('[data-nav-links]');
+  const navOverlay = document.querySelector('[data-nav-overlay]');
+  const navMenu = document.querySelector('[data-nav-menu]');
 
-	toggleNav?.addEventListener('click', () => {
-		navMenu?.classList.remove('translate-x-full');
-	});
+  function showMenu() {
+    navOverlay?.classList.remove('hidden');
+    navMenu?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
 
-	closeNav?.addEventListener('click', () => {
-		navMenu?.classList.add('translate-x-full');
-	});
+  function hideMenu() {
+    navOverlay?.classList.add('hidden');
+    navMenu?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  toggleNav?.addEventListener('click', showMenu);
+  closeNav?.addEventListener('click', hideMenu);
+  navOverlay?.addEventListener('click', hideMenu);
 </script>
