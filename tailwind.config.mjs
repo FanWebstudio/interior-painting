@@ -8,7 +8,7 @@ export default {
 					900: '#563B0E',
 				},
 				primary: {
-					600: '#F77F00',
+					600: '#F3752B',
 				},
 				secondary: {
 					950: '#563B0E',

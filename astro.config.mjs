@@ -9,6 +9,7 @@ export default defineConfig({
     tailwind(),
     icon({
       include: {
+        mdi: ["trophy-award", "thumb-up", "check-circle", "calendar-check"],
         star: ["star"],
         trustpilot: ["trustpilot"],
         google: ["google"],
