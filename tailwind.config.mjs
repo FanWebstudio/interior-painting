@@ -7,6 +7,12 @@ export default {
 				brown: {
 					900: '#563B0E',
 				},
+				primary: {
+					600: '#F77F00',
+				},
+				secondary: {
+					950: '#563B0E',
+				},
 			},
 			fontFamily: {
 				display: ['Montserrat', 'sans-serif'],
