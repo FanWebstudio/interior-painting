@@ -1,27 +1,24 @@
 ---
-import { colors } from "../../constants/theme";
+import { colors } from '../../constants/theme';
 
 interface Props {
   href?: string;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: 'primary' | 'secondary' | 'outline';
   class?: string;
 }
 
-const { href, variant = "primary", class: className = "" } = Astro.props;
+const { href, variant = 'primary', class: className = '' } = Astro.props;
 
-const baseStyles = "px-6 py-4 rounded-xl inline-flex items-center gap-2 transition-colors";
+const baseStyles = 'px-6 py-4 rounded-xl inline-flex items-center gap-2 transition-colors';
 const variantStyles = {
   primary: `bg-[${colors.primary}] text-white hover:bg-[${colors.primaryHover}]`,
   secondary: `bg-white text-[${colors.text}] hover:bg-gray-50`,
-  outline: `border-2 border-[${colors.primary}] text-[${colors.primary}] hover:bg-[${colors.primary}] hover:text-white`
+  outline: `border-2 border-[${colors.primary}] text-[${colors.primary}] hover:bg-[${colors.primary}] hover:text-white`,
 };
 
-const Component = href ? "a" : "button";
+const Component = href ? 'a' : 'button';
 ---
 
-<Component
-  href={href}
-  class:list={[baseStyles, variantStyles[variant], className]}
->
+<Component href={href} class:list={[baseStyles, variantStyles[variant], className]}>
   <slot />
 </Component>

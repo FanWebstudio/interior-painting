@@ -1,35 +1,35 @@
 ---
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
 }
 
 import Footer from './Footer.astro';
 import BackToTop from '../ui/BackToTop.astro';
 
 const {
-	title,
-	description = "Professional interior painting services for your home or business. Quality workmanship and attention to detail guaranteed.",
+  title,
+  description = 'Professional interior painting services for your home or business. Quality workmanship and attention to detail guaranteed.',
 } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content={description} />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#F77F00" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-		/>
-		<title>{title}</title>
-	</head>
-	<body class="min-h-screen">
-		<slot />
-		<Footer />
-		<BackToTop />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#F77F00" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen">
+    <slot />
+    <Footer />
+    <BackToTop />
+  </body>
 </html>

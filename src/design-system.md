@@ -5,20 +5,23 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ## Colors
 
 ### Primary Colors
+
 ```css
---primary-blue: #2563eb;     /* Blue 600 */
---primary-hover: #1d4ed8;    /* Blue 700 */
---primary-focus: #3b82f6;    /* Blue 500 */
+--primary-blue: #2563eb; /* Blue 600 */
+--primary-hover: #1d4ed8; /* Blue 700 */
+--primary-focus: #3b82f6; /* Blue 500 */
 ```
 
 ### Text Colors
+
 ```css
---text-primary: #111827;     /* Gray 900 */
---text-secondary: #4b5563;   /* Gray 600 */
---text-light: #6b7280;       /* Gray 500 */
+--text-primary: #111827; /* Gray 900 */
+--text-secondary: #4b5563; /* Gray 600 */
+--text-light: #6b7280; /* Gray 500 */
 ```
 
 ### Background Colors
+
 ```css
 --bg-white: #ffffff;
 --bg-gray-50: #f9fafb;
@@ -28,24 +31,28 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ## Typography
 
 ### Font Family
+
 ```css
---font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+--font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
 ```
 
 ### Font Sizes
+
 ```css
---text-xs: 0.75rem;    /* 12px */
---text-sm: 0.875rem;   /* 14px */
---text-base: 1rem;     /* 16px */
---text-lg: 1.125rem;   /* 18px */
---text-xl: 1.25rem;    /* 20px */
---text-2xl: 1.5rem;    /* 24px */
---text-3xl: 1.875rem;  /* 30px */
---text-4xl: 2.25rem;   /* 36px */
---text-5xl: 3rem;      /* 48px */
+--text-xs: 0.75rem; /* 12px */
+--text-sm: 0.875rem; /* 14px */
+--text-base: 1rem; /* 16px */
+--text-lg: 1.125rem; /* 18px */
+--text-xl: 1.25rem; /* 20px */
+--text-2xl: 1.5rem; /* 24px */
+--text-3xl: 1.875rem; /* 30px */
+--text-4xl: 2.25rem; /* 36px */
+--text-5xl: 3rem; /* 48px */
 ```
 
 ### Font Weights
+
 ```css
 --font-normal: 400;
 --font-medium: 500;
@@ -56,16 +63,17 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ## Spacing
 
 ### Standard Spacing Scale
+
 ```css
---space-1: 0.25rem;    /* 4px */
---space-2: 0.5rem;     /* 8px */
---space-3: 0.75rem;    /* 12px */
---space-4: 1rem;       /* 16px */
---space-6: 1.5rem;     /* 24px */
---space-8: 2rem;       /* 32px */
---space-12: 3rem;      /* 48px */
---space-16: 4rem;      /* 64px */
---space-20: 5rem;      /* 80px */
+--space-1: 0.25rem; /* 4px */
+--space-2: 0.5rem; /* 8px */
+--space-3: 0.75rem; /* 12px */
+--space-4: 1rem; /* 16px */
+--space-6: 1.5rem; /* 24px */
+--space-8: 2rem; /* 32px */
+--space-12: 3rem; /* 48px */
+--space-16: 4rem; /* 64px */
+--space-20: 5rem; /* 80px */
 ```
 
 ## Components
@@ -73,15 +81,21 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ### Buttons
 
 #### Primary Button
+
 ```html
-<button class="bg-blue-600 py-3 px-4 rounded-md text-white font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+<button
+  class="bg-blue-600 py-3 px-4 rounded-md text-white font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+>
   Button Text
 </button>
 ```
 
 #### Secondary Button
+
 ```html
-<button class="bg-gray-100 py-3 px-4 rounded-md text-gray-900 font-semibold hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+<button
+  class="bg-gray-100 py-3 px-4 rounded-md text-gray-900 font-semibold hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+>
   Button Text
 </button>
 ```
@@ -89,6 +103,7 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ### Form Elements
 
 #### Text Input
+
 ```html
 <input
   type="text"
@@ -97,6 +112,7 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ```
 
 #### Text Area
+
 ```html
 <textarea
   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -105,15 +121,15 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ```
 
 #### Form Label
+
 ```html
-<label class="block text-sm font-medium text-gray-700">
-  Label Text
-</label>
+<label class="block text-sm font-medium text-gray-700"> Label Text </label>
 ```
 
 ### Cards
 
 #### Basic Card
+
 ```html
 <div class="bg-white p-8 rounded-lg shadow-lg">
   <!-- Card content -->
@@ -123,38 +139,35 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ### Section Headers
 
 #### Main Header
+
 ```html
-<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-  Header Text
-</h1>
+<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Header Text</h1>
 ```
 
 #### Section Header
+
 ```html
-<h2 class="text-3xl font-bold text-gray-900">
-  Section Header
-</h2>
+<h2 class="text-3xl font-bold text-gray-900">Section Header</h2>
 ```
 
 #### Subsection Header
+
 ```html
-<h3 class="text-lg font-medium text-gray-900">
-  Subsection Header
-</h3>
+<h3 class="text-lg font-medium text-gray-900">Subsection Header</h3>
 ```
 
 ### Navigation
 
 #### Navigation Link
+
 ```html
-<a class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">
-  Link Text
-</a>
+<a class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium"> Link Text </a>
 ```
 
 ## Layout
 
 ### Container
+
 ```html
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- Content -->
@@ -162,6 +175,7 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ```
 
 ### Grid System
+
 ```html
 <!-- 2 Column Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -175,6 +189,7 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ```
 
 ### Section Spacing
+
 ```html
 <section class="py-20">
   <!-- Section content -->
@@ -184,10 +199,10 @@ This document outlines the design system used across the HomeMaster Interior Pai
 ## Responsive Breakpoints
 
 ```css
---sm: 640px;   /* @media (min-width: 640px) */
---md: 768px;   /* @media (min-width: 768px) */
---lg: 1024px;  /* @media (min-width: 1024px) */
---xl: 1280px;  /* @media (min-width: 1280px) */
+--sm: 640px; /* @media (min-width: 640px) */
+--md: 768px; /* @media (min-width: 768px) */
+--lg: 1024px; /* @media (min-width: 1024px) */
+--xl: 1280px; /* @media (min-width: 1280px) */
 --2xl: 1536px; /* @media (min-width: 1536px) */
 ```
 

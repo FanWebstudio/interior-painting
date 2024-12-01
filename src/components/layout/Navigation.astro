@@ -1,17 +1,17 @@
 ---
-import { colors } from "../../constants/theme";
-import Button from "../ui/Button.astro";
+import { colors } from '../../constants/theme';
+import Button from '../ui/Button.astro';
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/transformation", label: "Transformation" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/transformation', label: 'Transformation' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ];
 ---
 
-<header 
+<header
   class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-300"
   id="main-header"
 >
@@ -23,12 +23,7 @@ const navLinks = [
     </a>
 
     <!-- Mobile Menu Button -->
-    <button
-      type="button"
-      class="lg:hidden text-[#0D0D0D]"
-      aria-label="Toggle menu"
-      data-toggle-nav
-    >
+    <button type="button" class="lg:hidden text-[#0D0D0D]" aria-label="Toggle menu" data-toggle-nav>
       <i class="fa-solid fa-bars text-2xl"></i>
     </button>
 
@@ -36,10 +31,7 @@ const navLinks = [
     <div class="hidden lg:flex items-center justify-center gap-8 lg:w-2/4" data-nav-links>
       {
         navLinks.map(({ href, label }) => (
-          <a
-            href={href}
-            class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors"
-          >
+          <a href={href} class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors">
             {label}
           </a>
         ))
@@ -65,10 +57,7 @@ const navLinks = [
       <div class="flex flex-col gap-4">
         {
           navLinks.map(({ href, label }) => (
-            <a
-              href={href}
-              class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors"
-            >
+            <a href={href} class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors">
               {label}
             </a>
           ))
@@ -95,7 +84,7 @@ const navLinks = [
   // Function to update header styles based on scroll position
   const updateHeader = () => {
     const scrollY = window.scrollY;
-    
+
     if (scrollY > 0) {
       header?.classList.add('bg-white', 'shadow-md');
     } else {
@@ -131,7 +120,7 @@ const navLinks = [
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
-  
+
   #main-header.bg-white {
     background-color: rgba(255, 255, 255, 0.95);
   }

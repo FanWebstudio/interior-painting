@@ -9,15 +9,7 @@ interface Props {
   style?: string;
 }
 
-const {
-  src,
-  alt,
-  width,
-  height,
-  class: className = "",
-  sizes = "100vw",
-  style,
-} = Astro.props;
+const { src, alt, width, height, class: className = '', sizes = '100vw', style } = Astro.props;
 
 // Check if the image is from an external source
 const isExternal = src.startsWith('http');
@@ -26,18 +18,17 @@ const isSvg = src.endsWith('.svg');
 // Generate srcset only for external images that support it
 const generateSrcSet = (src: string) => {
   if (!isExternal || isSvg) return undefined;
-  
+
   // Special handling for Unsplash images
   if (src.includes('unsplash.com')) {
     const baseUrl = src.split('?')[0];
     return [320, 640, 768, 1024, 1280, 1536]
-      .map(size => `${baseUrl}?auto=format&fit=crop&w=${size}&q=80 ${size}w`)
+      .map((size) => `${baseUrl}?auto=format&fit=crop&w=${size}&q=80 ${size}w`)
       .join(', ');
   }
-  
+
   return undefined;
 };
-
 ---
 
 <img
@@ -48,8 +39,8 @@ const generateSrcSet = (src: string) => {
   class:list={[
     className,
     'transition-opacity duration-300',
-    {'opacity-0': !isSvg},
-    'max-w-full w-auto' // Ensure image respects container width while maintaining aspect ratio
+    { 'opacity-0': !isSvg },
+    'max-w-full w-auto', // Ensure image respects container width while maintaining aspect ratio
   ]}
   loading="lazy"
   decoding="async"
@@ -68,10 +59,10 @@ const generateSrcSet = (src: string) => {
 <script>
   // Intersection Observer for enhanced lazy loading
   const images = document.querySelectorAll('img[loading="lazy"]:not([src$=".svg"])');
-  
+
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target as HTMLImageElement;
           if (img.dataset.src) {
@@ -83,6 +74,6 @@ const generateSrcSet = (src: string) => {
       });
     });
 
-    images.forEach(img => imageObserver.observe(img));
+    images.forEach((img) => imageObserver.observe(img));
   }
 </script>
