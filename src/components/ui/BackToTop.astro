@@ -1,0 +1,46 @@
+---
+---
+
+<button
+  id="back-to-top"
+  class="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gray-800 text-white shadow-lg transition-all duration-300 hover:bg-gray-700 translate-y-24"
+  aria-label="Back to top"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2.5"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"
+    />
+  </svg>
+</button>
+
+<script>
+  const backToTopButton = document.getElementById('back-to-top');
+
+  const toggleBackToTop = () => {
+    if (window.scrollY > 300) {
+      backToTopButton?.classList.remove('translate-y-24');
+    } else {
+      backToTopButton?.classList.add('translate-y-24');
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  // Add event listeners
+  window.addEventListener('scroll', toggleBackToTop);
+  backToTopButton?.addEventListener('click', scrollToTop);
+</script>

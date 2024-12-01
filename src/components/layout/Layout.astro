@@ -5,6 +5,7 @@ interface Props {
 }
 
 import Footer from './Footer.astro';
+import BackToTop from '../ui/BackToTop.astro';
 
 const {
 	title,
@@ -29,5 +30,6 @@ const {
 	<body class="min-h-screen">
 		<slot />
 		<Footer />
+		<BackToTop />
 	</body>
 </html>
