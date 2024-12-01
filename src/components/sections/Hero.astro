@@ -1,6 +1,7 @@
 ---
 import Button from "../ui/Button.astro";
 import Container from "../ui/Container.astro";
+import Image from "../ui/Image.astro";
 ---
 
 <section class="pt-2 pb-8 sm:pt-3 sm:pb-12 md:pt-4 md:pb-16 lg:pt-6 lg:pb-20">
@@ -56,24 +57,28 @@ import Container from "../ui/Container.astro";
             Trusted by Industry Leaders
           </p>
           <div
-            class="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 lg:justify-start lg:gap-12"
+            class="flex items-center justify-center gap-6 sm:gap-10 md:gap-12 lg:justify-start lg:gap-16"
           >
-            <img 
+            <Image 
               src="/images/logos/slack.png" 
               alt="Slack" 
-              class="h-8 sm:h-9 md:h-10 lg:h-11 opacity-90 hover:opacity-100 transition-opacity"
+              class="h-10 sm:h-20 md:h-24 lg:h-32 opacity-90 hover:opacity-100 transition-opacity"
+              width={128}
+              height={128}
             />
-            <img 
+            <Image 
               src="/images/logos/spotify.png" 
               alt="Spotify" 
-              class="h-8 sm:h-9 md:h-10 lg:h-11 opacity-90 hover:opacity-100 transition-opacity"
-              style="filter: brightness(0) invert(59%) sepia(83%) saturate(1096%) hue-rotate(93deg) brightness(97%) contrast(93%);"
+              class="h-10 sm:h-20 md:h-24 lg:h-32 opacity-90 hover:opacity-100 transition-opacity"
+              width={128}
+              height={128}
             />
-            <img 
+            <Image 
               src="/images/logos/coinbase.png" 
               alt="Coinbase" 
-              class="h-8 sm:h-9 md:h-10 lg:h-11 opacity-90 hover:opacity-100 transition-opacity"
-              style="filter: brightness(0) invert(35%) sepia(95%) saturate(1267%) hue-rotate(177deg) brightness(97%) contrast(98%);"
+              class="h-10 sm:h-20 md:h-24 lg:h-32 opacity-90 hover:opacity-100 transition-opacity"
+              width={128}
+              height={128}
             />
           </div>
         </div>
@@ -82,11 +87,19 @@ import Container from "../ui/Container.astro";
 
     <!-- Right Section -->
     <div class="w-full lg:w-1/2">
-      <img
-        src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80"
-        alt="Professional painter working on interior wall"
-        class="h-[500px] w-full rounded-2xl object-cover sm:h-[600px] md:h-[700px] lg:h-[800px]"
-      />
+      <div class="relative h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px]">
+        <!-- Loading placeholder -->
+        <div class="absolute inset-0 bg-gray-200 rounded-2xl animate-pulse"></div>
+        
+        <Image
+          src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80"
+          alt="Professional painter working on interior wall"
+          class="absolute inset-0 w-full h-full rounded-2xl object-cover"
+          width={1920}
+          height={1080}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+      </div>
     </div>
   </div>
 </section>

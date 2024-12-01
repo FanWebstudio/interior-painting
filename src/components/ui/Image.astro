@@ -1,0 +1,89 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  sizes?: string;
+  style?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className = "",
+  sizes = "100vw",
+  style,
+} = Astro.props;
+
+// Check if the image is from an external source
+const isExternal = src.startsWith('http');
+const isSvg = src.endsWith('.svg');
+
+// Generate srcset only for external images that support it
+const generateSrcSet = (src: string) => {
+  if (!isExternal || isSvg) return undefined;
+  
+  // Special handling for Unsplash images
+  if (src.includes('unsplash.com')) {
+    const baseUrl = src.split('?')[0];
+    return [320, 640, 768, 1024, 1280, 1536]
+      .map(size => `${baseUrl}?auto=format&fit=crop&w=${size}&q=80 ${size}w`)
+      .join(', ');
+  }
+  
+  return undefined;
+};
+
+---
+
+<img
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  class:list={[
+    className,
+    'transition-opacity duration-300',
+    {'opacity-0': !isSvg} // Only apply opacity-0 to non-SVG images
+  ]}
+  loading="lazy"
+  decoding="async"
+  sizes={isExternal && !isSvg ? sizes : undefined}
+  srcset={generateSrcSet(src)}
+  onload="this.classList.remove('opacity-0')"
+  style={style}
+/>
+
+<style>
+  img {
+    will-change: opacity;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<script>
+  // Intersection Observer for enhanced lazy loading
+  const images = document.querySelectorAll('img[loading="lazy"]:not([src$=".svg"])');
+  
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+  }
+</script>
