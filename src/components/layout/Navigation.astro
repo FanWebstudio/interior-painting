@@ -11,7 +11,10 @@ const navLinks = [
 ];
 ---
 
-<header class="px-4 sm:px-6 lg:px-8 py-4">
+<header 
+  class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-300"
+  id="main-header"
+>
   <nav class="max-w-7xl mx-auto flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 lg:w-1/4">
@@ -49,31 +52,22 @@ const navLinks = [
         href="/quote"
         class="inline-flex items-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors"
       >
-        <span>Get Quote</span>
+        Get Quote
         <i class="fa-solid fa-arrow-right"></i>
       </a>
     </div>
 
     <!-- Mobile Menu -->
     <div
-      class="hidden fixed inset-0 bg-black/50 lg:hidden"
-      data-nav-overlay
-    ></div>
-    <div
-      class="hidden fixed top-0 right-0 bottom-0 w-[300px] bg-white p-6 lg:hidden shadow-xl"
+      class="hidden absolute top-full left-0 right-0 bg-white p-4 lg:hidden shadow-lg"
       data-nav-menu
     >
-      <div class="flex justify-end mb-8">
-        <button type="button" aria-label="Close menu" data-close-nav>
-          <i class="fa-solid fa-xmark text-2xl text-[#0D0D0D]"></i>
-        </button>
-      </div>
       <div class="flex flex-col gap-4">
         {
           navLinks.map(({ href, label }) => (
             <a
               href={href}
-              class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors text-lg"
+              class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors"
             >
               {label}
             </a>
@@ -81,9 +75,9 @@ const navLinks = [
         }
         <a
           href="/quote"
-          class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors mt-4"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors"
         >
-          <span>Get Quote</span>
+          Get Quote
           <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
@@ -91,26 +85,54 @@ const navLinks = [
   </nav>
 </header>
 
+<!-- Spacer to prevent content from jumping when header becomes fixed -->
+<div class="h-[72px]"></div>
+
 <script>
+  const header = document.getElementById('main-header');
+  let lastScrollY = window.scrollY;
+
+  // Function to update header styles based on scroll position
+  const updateHeader = () => {
+    const scrollY = window.scrollY;
+    
+    if (scrollY > 0) {
+      header?.classList.add('bg-white', 'shadow-md');
+    } else {
+      header?.classList.remove('bg-white', 'shadow-md');
+    }
+
+    // Optional: Hide header on scroll down, show on scroll up
+    if (scrollY > lastScrollY) {
+      header?.classList.add('-translate-y-full');
+    } else {
+      header?.classList.remove('-translate-y-full');
+    }
+
+    lastScrollY = scrollY;
+  };
+
+  // Add scroll event listener
+  window.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateHeader);
+  });
+
+  // Handle mobile menu
   const toggleNav = document.querySelector('[data-toggle-nav]');
-  const closeNav = document.querySelector('[data-close-nav]');
-  const navLinks = document.querySelector('[data-nav-links]');
-  const navOverlay = document.querySelector('[data-nav-overlay]');
   const navMenu = document.querySelector('[data-nav-menu]');
 
-  function showMenu() {
-    navOverlay?.classList.remove('hidden');
-    navMenu?.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function hideMenu() {
-    navOverlay?.classList.add('hidden');
-    navMenu?.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
-
-  toggleNav?.addEventListener('click', showMenu);
-  closeNav?.addEventListener('click', hideMenu);
-  navOverlay?.addEventListener('click', hideMenu);
+  toggleNav?.addEventListener('click', () => {
+    navMenu?.classList.toggle('hidden');
+  });
 </script>
+
+<style>
+  #main-header {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  #main-header.bg-white {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+</style>
