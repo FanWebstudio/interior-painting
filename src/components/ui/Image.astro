@@ -4,12 +4,12 @@ import { getImage } from 'astro:assets';
 interface Props {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
   class?: string;
   sizes?: string;
   style?: string;
-  format?: 'webp' | 'avif' | 'png' | 'jpg';
+  format?: 'avif' | 'webp' | 'png' | 'jpg';
   quality?: number;
 }
 
@@ -21,7 +21,7 @@ const {
   class: className = '',
   sizes = '100vw',
   style,
-  format = 'webp',
+  format = 'avif',
   quality = 80,
 } = Astro.props;
 
@@ -38,12 +38,15 @@ const generateSrcSet = (src: string) => {
   if (src.includes('unsplash.com')) {
     const baseUrl = src.split('?')[0];
     return [320, 640, 768, 1024, 1280, 1536]
-      .map((size) => `${baseUrl}?auto=format&fit=crop&w=${size}&q=${quality} ${size}w`)
+      .map((size) => `${baseUrl}?auto=format&fit=crop&w=${size}&q=${quality}&fm=${format} ${size}w`)
       .join(', ');
   }
 
   return undefined;
 };
+
+// Calculate aspect ratio for proper sizing
+const aspectRatio = width && height ? width / height : undefined;
 ---
 
 {
@@ -53,8 +56,8 @@ const generateSrcSet = (src: string) => {
       alt={alt}
       width={width}
       height={height}
-      class:list={[className, 'max-w-full w-auto']}
-      style={style}
+      class:list={[className, 'max-w-full h-auto']}
+      style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
     />
   ) : isPublic ? (
     <img
@@ -64,12 +67,12 @@ const generateSrcSet = (src: string) => {
       height={height}
       class:list={[
         className,
-        'transition-opacity duration-300 opacity-0 max-w-full w-auto',
+        'transition-opacity duration-300 opacity-0 max-w-full h-auto',
       ]}
       loading="lazy"
       decoding="async"
       onload="this.classList.remove('opacity-0')"
-      style={`${style || ''}; height: auto;`}
+      style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
     />
   ) : isExternal ? (
     <img
@@ -79,14 +82,14 @@ const generateSrcSet = (src: string) => {
       height={height}
       class:list={[
         className,
-        'transition-opacity duration-300 opacity-0 max-w-full w-auto',
+        'transition-opacity duration-300 opacity-0 max-w-full h-auto',
       ]}
       loading="lazy"
       decoding="async"
       sizes={sizes}
       srcset={generateSrcSet(src)}
       onload="this.classList.remove('opacity-0')"
-      style={`${style || ''}; height: auto;`}
+      style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
     />
   ) : (
     <img
@@ -96,40 +99,30 @@ const generateSrcSet = (src: string) => {
       height={height}
       class:list={[
         className,
-        'transition-opacity duration-300 opacity-0 max-w-full w-auto',
+        'transition-opacity duration-300 opacity-0 max-w-full h-auto',
       ]}
       loading="lazy"
       decoding="async"
       onload="this.classList.remove('opacity-0')"
-      style={`${style || ''}; height: auto;`}
+      style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
     />
   )
 }
 
-<style>
-  img {
-    will-change: opacity;
-  }
-</style>
-
 <script>
-  // Intersection Observer for enhanced lazy loading
-  const images = document.querySelectorAll('img[loading="lazy"]:not([src$=".svg"])');
-
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target as HTMLImageElement;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          observer.unobserve(img);
+  // Intersection Observer for lazy loading
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target as HTMLImageElement;
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
         }
-      });
+        imageObserver.unobserve(img);
+      }
     });
+  });
 
-    images.forEach((img) => imageObserver.observe(img));
-  }
+  lazyImages.forEach((img) => imageObserver.observe(img));
 </script>

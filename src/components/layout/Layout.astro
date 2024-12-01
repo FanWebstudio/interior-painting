@@ -6,6 +6,7 @@ interface Props {
 
 import Footer from './Footer.astro';
 import BackToTop from '../ui/BackToTop.astro';
+import HeadAssets from './HeadAssets.astro';
 
 const {
   title,
@@ -21,10 +22,7 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#F77F00" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
+    <HeadAssets />
     <title>{title}</title>
   </head>
   <body class="min-h-screen">
