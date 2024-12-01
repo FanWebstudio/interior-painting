@@ -136,6 +136,40 @@ This document outlines the design system used across the HomeMaster Interior Pai
 </div>
 ```
 
+#### Testimonial Card
+
+```html
+<div class="bg-gray-100/40 border border-gray-100 rounded-2xl p-8 flex flex-col justify-between h-full">
+  <div class="flex flex-col">
+    <!-- Author Profile -->
+    <div class="flex items-center gap-4 mb-6">
+      <img
+        src="/path/to/image.jpg"
+        alt="Author Name"
+        class="w-14 h-14 rounded-full object-cover"
+      />
+      <div>
+        <h3 class="font-medium text-lg">Author Name</h3>
+        <p class="text-gray-600">Author Title</p>
+      </div>
+    </div>
+    
+    <!-- Testimonial Content -->
+    <h4 class="text-xl font-medium mb-4">Testimonial Title</h4>
+    <p class="text-gray-600">Testimonial content goes here...</p>
+  </div>
+
+  <!-- Rating Footer -->
+  <div class="mt-8">
+    <div class="w-full h-[1px] border-t border-[#6F6F6F]/10"></div>
+    <div class="flex justify-between items-center pt-8">
+      <div class="text-[#FDC500] font-medium">5.0</div>
+      <div class="text-gray-600">via Platform</div>
+    </div>
+  </div>
+</div>
+```
+
 ### Section Headers
 
 #### Main Header
