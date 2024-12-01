@@ -11,7 +11,7 @@ describe('Accessibility Checks', () => {
     `);
 
     const images = dom.window.document.querySelectorAll('img');
-    images.forEach(img => {
+    images.forEach((img: HTMLImageElement) => {
       expect(img.getAttribute('alt')).toBeTruthy();
       expect(img.getAttribute('alt')?.trim()).not.toBe('');
     });
