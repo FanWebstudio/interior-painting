@@ -1,16 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import Button from '../ui/Button.astro';
-import Image from '../ui/Image.astro';
 
-const heroImageUrl = 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=85&w=1200&h=800';
+// Import the hero image
+const heroImagePath = '/images/hero/painter-hero.jpg';
 ---
 
 <!-- Preload hero image -->
 <link
   rel="preload"
   as="image"
-  href={heroImageUrl}
-  type="image/jpeg"
+  href={heroImagePath}
+  type="image/avif"
   fetchpriority="high"
 />
 
@@ -96,14 +97,15 @@ const heroImageUrl = 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?
     <!-- Right Section -->
     <div class="w-full lg:w-1/2">
       <div class="relative h-[500px] sm:h-[600px] md:h-[700px] lg:h-[800px] rounded-2xl overflow-hidden">
-        <img
-          src={heroImageUrl}
+        <Image
+          src={heroImagePath}
           alt="Professional painter working on interior wall"
-          width="1200"
-          height="800"
+          width={1200}
+          height={800}
           class="w-full h-full object-cover rounded-2xl"
           loading="eager"
-          decoding="async"
+          format="avif"
+          quality={80}
         />
       </div>
     </div>
