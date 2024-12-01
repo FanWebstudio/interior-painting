@@ -1,0 +1,72 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  class?: string;
+}
+
+const { src, alt, width, height, class: className = '' } = Astro.props;
+
+// Calculate aspect ratio for placeholder
+const aspectRatio = (height / width) * 100;
+
+// Generate blur placeholder URL
+const blurHash = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx0fHRsdHSIgIRwhISEhISwhIiQmJSUmJiQkJjIyMjIyMjI+Pj4+Pj4+Pj4+Pj4+Pj7/2wBDAR0XFyMeIyYeJiY+LSYtPj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';
+---
+
+<div class="relative w-full h-full">
+  <!-- Preload hero image -->
+  <link
+    rel="preload"
+    as="image"
+    href={src}
+    type="image/avif"
+    fetchpriority="high"
+  />
+
+  <!-- Blur placeholder -->
+  <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={`background-image: url('${blurHash}'); padding-bottom: ${aspectRatio}%;`}
+  >
+  </div>
+
+  <!-- Main image -->
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class={`w-full h-full object-cover ${className}`}
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+  />
+</div>
+
+<style>
+  img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  img.loaded {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Handle image loading
+  const img = document.querySelector('img');
+  if (img) {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+      });
+    }
+  }
+</script>
