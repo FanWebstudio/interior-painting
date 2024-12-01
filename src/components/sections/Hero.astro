@@ -59,27 +59,33 @@ import Image from "../ui/Image.astro";
           <div
             class="flex items-center justify-center gap-6 sm:gap-10 md:gap-12 lg:justify-start lg:gap-16"
           >
-            <Image 
-              src="/images/logos/slack.png" 
-              alt="Slack" 
-              class="h-10 sm:h-20 md:h-24 lg:h-32 opacity-90 hover:opacity-100 transition-opacity"
-              width={128}
-              height={128}
-            />
-            <Image 
-              src="/images/logos/spotify.png" 
-              alt="Spotify" 
-              class="h-10 sm:h-20 md:h-24 lg:h-32 opacity-90 hover:opacity-100 transition-opacity"
-              width={128}
-              height={128}
-            />
-            <Image 
-              src="/images/logos/coinbase.png" 
-              alt="Coinbase" 
-              class="h-10 sm:h-20 md:h-24 lg:h-32 opacity-90 hover:opacity-100 transition-opacity"
-              width={128}
-              height={128}
-            />
+            <div class="w-[80px] sm:w-[120px] md:w-[140px] lg:w-[160px]">
+              <Image 
+                src="/images/logos/slack.png" 
+                alt="Slack" 
+                class="w-full opacity-90 hover:opacity-100 transition-opacity"
+                width={160}
+                height={160}
+              />
+            </div>
+            <div class="w-[80px] sm:w-[120px] md:w-[140px] lg:w-[160px]">
+              <Image 
+                src="/images/logos/spotify.png" 
+                alt="Spotify" 
+                class="w-full opacity-90 hover:opacity-100 transition-opacity"
+                width={160}
+                height={160}
+              />
+            </div>
+            <div class="w-[80px] sm:w-[120px] md:w-[140px] lg:w-[160px]">
+              <Image 
+                src="/images/logos/coinbase.png" 
+                alt="Coinbase" 
+                class="w-full opacity-90 hover:opacity-100 transition-opacity"
+                width={160}
+                height={160}
+              />
+            </div>
           </div>
         </div>
       </div>

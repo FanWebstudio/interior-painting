@@ -48,21 +48,20 @@ const generateSrcSet = (src: string) => {
   class:list={[
     className,
     'transition-opacity duration-300',
-    {'opacity-0': !isSvg} // Only apply opacity-0 to non-SVG images
+    {'opacity-0': !isSvg},
+    'max-w-full w-auto' // Ensure image respects container width while maintaining aspect ratio
   ]}
   loading="lazy"
   decoding="async"
   sizes={isExternal && !isSvg ? sizes : undefined}
   srcset={generateSrcSet(src)}
   onload="this.classList.remove('opacity-0')"
-  style={style}
+  style={`${style || ''}; height: auto;`}
 />
 
 <style>
   img {
     will-change: opacity;
-    max-width: 100%;
-    height: auto;
   }
 </style>
 
