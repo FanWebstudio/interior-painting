@@ -11,6 +11,10 @@ interface Props {
   style?: string;
   format?: 'avif' | 'webp' | 'png' | 'jpg';
   quality?: number;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  role?: string;
+  longdesc?: string;
 }
 
 const {
@@ -23,6 +27,10 @@ const {
   style,
   format = 'avif',
   quality = 80,
+  loading = 'lazy',
+  decoding = 'async',
+  role,
+  longdesc
 } = Astro.props;
 
 // Check if the image is from an external source or SVG
@@ -47,64 +55,83 @@ const generateSrcSet = (src: string) => {
 
 // Calculate aspect ratio for proper sizing
 const aspectRatio = width && height ? width / height : undefined;
+
+// Ensure alt text is descriptive
+const processedAlt = alt || '';
+if (!alt) {
+  console.warn('Warning: Image is missing alt text. Please provide descriptive alt text for accessibility.');
+}
+
 ---
 
 {
   isSvg ? (
     <img
       src={src}
-      alt={alt}
+      alt={processedAlt}
       width={width}
       height={height}
       class:list={[className, 'max-w-full h-auto']}
       style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
+      role={role || (processedAlt === '' ? 'presentation' : undefined)}
+      longdesc={longdesc}
+      aria-hidden={processedAlt === ''}
     />
   ) : isPublic ? (
     <img
       src={src}
-      alt={alt}
+      alt={processedAlt}
       width={width}
       height={height}
       class:list={[
         className,
         'transition-opacity duration-300 opacity-0 max-w-full h-auto',
       ]}
-      loading="lazy"
-      decoding="async"
+      loading={loading}
+      decoding={decoding}
       onload="this.classList.remove('opacity-0')"
       style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
+      role={role || (processedAlt === '' ? 'presentation' : undefined)}
+      longdesc={longdesc}
+      aria-hidden={processedAlt === ''}
     />
   ) : isExternal ? (
     <img
       src={src}
-      alt={alt}
+      alt={processedAlt}
       width={width}
       height={height}
       class:list={[
         className,
         'transition-opacity duration-300 opacity-0 max-w-full h-auto',
       ]}
-      loading="lazy"
-      decoding="async"
+      loading={loading}
+      decoding={decoding}
       sizes={sizes}
       srcset={generateSrcSet(src)}
       onload="this.classList.remove('opacity-0')"
       style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
+      role={role || (processedAlt === '' ? 'presentation' : undefined)}
+      longdesc={longdesc}
+      aria-hidden={processedAlt === ''}
     />
   ) : (
     <img
       src={src}
-      alt={alt}
+      alt={processedAlt}
       width={width}
       height={height}
       class:list={[
         className,
         'transition-opacity duration-300 opacity-0 max-w-full h-auto',
       ]}
-      loading="lazy"
-      decoding="async"
+      loading={loading}
+      decoding={decoding}
       onload="this.classList.remove('opacity-0')"
       style={`aspect-ratio: ${aspectRatio}; ${style || ''}`}
+      role={role || (processedAlt === '' ? 'presentation' : undefined)}
+      longdesc={longdesc}
+      aria-hidden={processedAlt === ''}
     />
   )
 }

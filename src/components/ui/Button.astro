@@ -5,20 +5,44 @@ interface Props {
   href?: string;
   variant?: 'primary' | 'secondary' | 'outline';
   class?: string;
+  ariaLabel?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const { href, variant = 'primary', class: className = '' } = Astro.props;
+const { 
+  href, 
+  variant = 'primary', 
+  class: className = '',
+  ariaLabel,
+  disabled = false,
+  type = 'button'
+} = Astro.props;
 
-const baseStyles = 'px-6 py-4 rounded-xl inline-flex items-center gap-2 transition-colors';
+const baseStyles = 'px-6 py-4 rounded-xl inline-flex items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
 const variantStyles = {
-  primary: `bg-[${colors.primary}] text-white hover:bg-[${colors.primaryHover}]`,
-  secondary: `bg-white text-[${colors.text}] hover:bg-gray-50`,
-  outline: `border-2 border-[${colors.primary}] text-[${colors.primary}] hover:bg-[${colors.primary}] hover:text-white`,
+  primary: `bg-[${colors.primary}] text-white hover:bg-[${colors.primaryHover}] focus:ring-[${colors.primary}]`,
+  secondary: `bg-white text-[${colors.text}] hover:bg-gray-50 focus:ring-[${colors.text}]`,
+  outline: `border-2 border-[${colors.primary}] text-[${colors.primary}] hover:bg-[${colors.primary}] hover:text-white focus:ring-[${colors.primary}]`,
 };
 
 const Component = href ? 'a' : 'button';
 ---
 
-<Component href={href} class:list={[baseStyles, variantStyles[variant], className]}>
+<Component 
+  href={href} 
+  class:list={[
+    baseStyles, 
+    variantStyles[variant], 
+    className,
+    disabled && 'opacity-50 cursor-not-allowed'
+  ]}
+  aria-label={ariaLabel}
+  aria-disabled={disabled}
+  disabled={disabled && Component === 'button'}
+  type={Component === 'button' ? type : undefined}
+  role={href ? undefined : 'button'}
+  tabindex={disabled ? '-1' : '0'}
+>
   <slot />
 </Component>

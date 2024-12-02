@@ -2,9 +2,16 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import icon from "astro-icon";
+import compress from 'astro-compress';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'static',
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto',
+    assets: 'assets'
+  },
   integrations: [
     tailwind(),
     icon({
@@ -15,6 +22,29 @@ export default defineConfig({
         google: ["google"],
         custom: ["*"],
       },
+      svgoOptions: {
+        multipass: true,
+        plugins: [
+          {
+            name: 'preset-default',
+            params: {
+              overrides: {
+                removeViewBox: false,
+                removeUnusedNS: true,
+                removeUselessDefs: true,
+                removeEmptyAttrs: true,
+              },
+            },
+          },
+        ],
+      },
+    }),
+    compress({
+      CSS: true,
+      HTML: true,
+      JavaScript: true,
+      Image: true,
+      SVG: true,
     })
   ],
   image: {
@@ -27,5 +57,23 @@ export default defineConfig({
         hostname: '**.unsplash.com'
       }
     ]
+  },
+  vite: {
+    build: {
+      cssMinify: true,
+      minify: 'terser',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+          }
+        }
+      }
+    },
+    ssr: {
+      noExternal: ['@astrojs/*']
+    }
   }
 });

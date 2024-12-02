@@ -14,24 +14,42 @@ const navLinks = [
 <header
   class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all duration-300"
   id="main-header"
+  role="banner"
 >
-  <nav class="max-w-7xl mx-auto flex items-center justify-between">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between" role="navigation" aria-label="Main navigation">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 lg:w-1/4">
-      <i class="fa-solid fa-paint-roller text-[#F3752B] text-2xl"></i>
+    <a href="/" class="flex items-center gap-2 lg:w-1/4" aria-label="HomeMaster - Home">
+      <i class="fa-solid fa-paint-roller text-[#F3752B] text-2xl" aria-hidden="true"></i>
       <span class="text-[#0D0D0D] text-2xl font-medium">HomeMaster</span>
     </a>
 
     <!-- Mobile Menu Button -->
-    <button type="button" class="lg:hidden text-[#0D0D0D]" aria-label="Toggle menu" data-toggle-nav>
-      <i class="fa-solid fa-bars text-2xl"></i>
+    <button 
+      type="button" 
+      class="lg:hidden text-[#0D0D0D]" 
+      aria-label="Toggle navigation menu" 
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-toggle-nav
+    >
+      <i class="fa-solid fa-bars text-2xl" aria-hidden="true"></i>
+      <span class="sr-only">Menu</span>
     </button>
 
     <!-- Navigation Links -->
-    <div class="hidden lg:flex items-center justify-center gap-8 lg:w-2/4" data-nav-links>
+    <div 
+      class="hidden lg:flex items-center justify-center gap-8 lg:w-2/4" 
+      role="menubar"
+      data-nav-links
+    >
       {
         navLinks.map(({ href, label }) => (
-          <a href={href} class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors">
+          <a 
+            href={href} 
+            class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors"
+            role="menuitem"
+            aria-current={Astro.url.pathname === href ? 'page' : undefined}
+          >
             {label}
           </a>
         ))
@@ -42,32 +60,42 @@ const navLinks = [
     <div class="hidden lg:flex justify-end lg:w-1/4">
       <a
         href="/quote"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-[#F3752B]"
+        aria-label="Get a free quote"
       >
         Get Quote
-        <i class="fa-solid fa-arrow-right"></i>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
 
     <!-- Mobile Menu -->
     <div
+      id="mobile-menu"
       class="hidden absolute top-full left-0 right-0 bg-white p-4 lg:hidden shadow-lg"
+      role="menu"
+      aria-label="Mobile navigation menu"
       data-nav-menu
     >
       <div class="flex flex-col gap-4">
         {
           navLinks.map(({ href, label }) => (
-            <a href={href} class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors">
+            <a 
+              href={href} 
+              class="text-[#0D0D0D] hover:text-[#F3752B] transition-colors"
+              role="menuitem"
+              aria-current={Astro.url.pathname === href ? 'page' : undefined}
+            >
               {label}
             </a>
           ))
         }
         <a
           href="/quote"
-          class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F3752B] text-white rounded-xl hover:bg-[#562A0E] transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-[#F3752B]"
+          aria-label="Get a free quote"
         >
           Get Quote
-          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
     </div>
@@ -75,10 +103,12 @@ const navLinks = [
 </header>
 
 <!-- Spacer to prevent content from jumping when header becomes fixed -->
-<div class="h-[72px]"></div>
+<div class="h-[72px]" aria-hidden="true"></div>
 
 <script>
   const header = document.getElementById('main-header');
+  const toggleButton = document.querySelector('[data-toggle-nav]');
+  const mobileMenu = document.getElementById('mobile-menu');
   let lastScrollY = window.scrollY;
 
   // Function to update header styles based on scroll position
@@ -101,17 +131,23 @@ const navLinks = [
     lastScrollY = scrollY;
   };
 
-  // Add scroll event listener
-  window.addEventListener('scroll', () => {
-    window.requestAnimationFrame(updateHeader);
+  // Toggle mobile menu
+  toggleButton?.addEventListener('click', () => {
+    const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+    toggleButton.setAttribute('aria-expanded', (!isExpanded).toString());
+    mobileMenu?.classList.toggle('hidden');
   });
 
-  // Handle mobile menu
-  const toggleNav = document.querySelector('[data-toggle-nav]');
-  const navMenu = document.querySelector('[data-nav-menu]');
+  // Update header on scroll
+  window.addEventListener('scroll', updateHeader);
 
-  toggleNav?.addEventListener('click', () => {
-    navMenu?.classList.toggle('hidden');
+  // Handle keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.add('hidden');
+      toggleButton?.setAttribute('aria-expanded', 'false');
+      toggleButton?.focus();
+    }
   });
 </script>
 
