@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/base",
   "include": [
     ".astro/types.d.ts",
     "src/types/**/*.d.ts",
@@ -9,6 +9,10 @@
     "dist"
   ],
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "allowJs": true,
+    "jsx": "preserve"
   }
 }

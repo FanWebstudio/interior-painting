@@ -20,14 +20,31 @@ const {
 } = Astro.props;
 
 const baseStyles = 'px-6 py-4 rounded-xl inline-flex items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
+
+// Use CSS custom properties for dynamic colors
 const variantStyles = {
-  primary: `bg-[${colors.primary}] text-white hover:bg-[${colors.primaryHover}] focus:ring-[${colors.primary}]`,
-  secondary: `bg-white text-[${colors.text}] hover:bg-gray-50 focus:ring-[${colors.text}]`,
-  outline: `border-2 border-[${colors.primary}] text-[${colors.primary}] hover:bg-[${colors.primary}] hover:text-white focus:ring-[${colors.primary}]`,
+  primary: 'bg-primary text-white hover:bg-primary-hover focus:ring-primary',
+  secondary: 'bg-white text-text hover:bg-gray-50 focus:ring-text',
+  outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
 };
 
 const Component = href ? 'a' : 'button';
 ---
+
+<style define:vars={{ 
+  primary: colors.primary,
+  'primary-hover': colors.primaryHover,
+  text: colors.text 
+}}>
+  .bg-primary { background-color: var(--primary); }
+  .hover\:bg-primary-hover:hover { background-color: var(--primary-hover); }
+  .text-primary { color: var(--primary); }
+  .border-primary { border-color: var(--primary); }
+  .hover\:bg-primary:hover { background-color: var(--primary); }
+  .focus\:ring-primary:focus { --tw-ring-color: var(--primary); }
+  .text-text { color: var(--text); }
+  .focus\:ring-text:focus { --tw-ring-color: var(--text); }
+</style>
 
 <Component 
   href={href} 

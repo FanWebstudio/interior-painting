@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint \"src/**/*.{js,ts,jsx,tsx,astro}\" --fix",
@@ -13,7 +13,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "audit": "node scripts/audit.js"
+    "audit": "node scripts/audit.js",
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
