@@ -1,0 +1,29 @@
+---
+import { Icon as AstroIcon } from 'astro-icon/components';
+
+interface Props {
+  name: string;
+  pack?: 'mdi' | 'fa-solid' | 'heroicons';
+  size?: number;
+  class?: string;
+  title?: string;
+}
+
+const {
+  name,
+  pack = 'mdi',
+  size = 24,
+  class: className = '',
+  title
+} = Astro.props;
+
+const iconName = `${pack}:${name}`;
+---
+
+<AstroIcon 
+  name={`${pack}:${name}`} 
+  size={size} 
+  class={className} 
+  aria-label={title}
+  aria-hidden={!title}
+/>

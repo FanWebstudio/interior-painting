@@ -16,52 +16,36 @@ export default defineConfig({
     tailwind(),
     icon({
       include: {
-        mdi: ["trophy-award", "thumb-up", "check-circle", "calendar-check"],
-        star: ["star"],
-        trustpilot: ["trustpilot"],
-        google: ["google"],
-        custom: ["*"],
-      },
-      svgoOptions: {
-        multipass: true,
-        plugins: [
-          {
-            name: 'preset-default',
-            params: {
-              overrides: {
-                removeViewBox: false,
-                removeUnusedNS: true,
-                removeUselessDefs: true,
-                removeEmptyAttrs: true,
-              },
-            },
-          },
+        mdi: [
+          "trophy-award",
+          "thumb-up",
+          "shield-check",
+          "brush",
+          "format-paint",
+          "palette",
+          "home",
+          "phone",
+          "email",
+          "menu",
+          "arrow-right",
+          "paint",
+          "hammer-wrench",
+          "home-modern"
         ],
-      },
-    }),
-    compress({
-      CSS: true,
-      HTML: true,
-      JavaScript: true,
-      Image: true,
-      SVG: true,
-    })
-  ],
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/sharp'
-    },
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.unsplash.com'
+        heroicons: [
+          "user",
+          "calendar",
+          "chart-bar",
+          "document",
+          "cog",
+          "check"
+        ]
       }
-    ]
-  },
+    }),
+    compress()
+  ],
   vite: {
     build: {
-      cssMinify: true,
-      minify: 'terser',
       rollupOptions: {
         output: {
           manualChunks(id) {
